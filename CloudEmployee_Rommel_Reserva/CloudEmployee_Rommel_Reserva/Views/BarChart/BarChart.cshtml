@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CloudEmployee_Rommel_Reserva.Models.BarChartModel.ChartData>
+@using JQChart.Web.Mvc
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.jqChart.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery.jqRangeSlider.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/le-frog/jquery-ui-1.8.20.css" />
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/jquery.mousewheel.js"></script>
+    <script src="~/Scripts/jquery.jqChart.min.js"></script>
+    <script src="~/Scripts/jquery.jqRangeSlider.min.js"></script>
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            @(Html.JQChart()
+                .Chart(Model)
+                .ID("jqChart")
+                .Width(500)
+                .Height(300)
+                .Title("Bar Chart")
+                .Animation(TimeSpan.FromSeconds(1))
+                .Shadows(true)
+                .Series(series =>
+                    {
+                        series.Column()
+                              .Title("Product A")
+                              .FillStyle("#418CF0")
+                              .XValues(el => el.Label)
+                              .YValues(el => el.Value1);
+
+                        series.Column()
+                              .Title("Product B")
+                              .FillStyle("#FCB441")
+                              .XValues(el => el.Label)
+                              .YValues(el => el.Value2);
+                    }
+                )
+                .Render()
+            )
+        </div>
+    </div>
+</body>
+</html>
